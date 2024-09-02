@@ -4,8 +4,8 @@ const tg = window.Telegram.WebApp;
 
 function ConnectWithTg({ onUserData }) {
   const [or, setOr] = useState([]);
-  const [openTime, setOpenTime] = useState(new Date().toLocaleTimeString());
-
+  const [openTime] = useState(new Date().toLocaleTimeString());
+  
   useEffect(() => {
     tg.ready();
 
