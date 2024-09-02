@@ -5,10 +5,12 @@ function App() {
   const [name, setName] = useState("");
   const [userData, setUserData] = useState(null);
 
-  useEffect(() => {
-    Telegram.WebApp.ready();
+  const tg = window.Telegram.WebApp
 
-    const user = Telegram.WebApp.initDataUnsafe?.user;
+  useEffect(() => {
+    tg.ready();
+
+    const user = tg.initDataUnsafe?.user;
     if (user) {
       setUserData(user);
     }
@@ -31,7 +33,7 @@ function App() {
   };
 
   const closeApp = () => {
-    Telegram.WebApp.close();
+    tg.close();
   };
 
   return (
