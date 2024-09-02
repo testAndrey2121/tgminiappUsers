@@ -33,6 +33,17 @@ function App() {
     setUserData(user);
   };
 
+  const handleReceivedData = (event) => {
+    console.log("Received data from Telegram:", event.data);
+  };
+
+  useEffect(() => {
+    window.Telegram.WebApp.onEvent("mainButtonClicked", handleReceivedData);
+    return () => {
+      window.Telegram.WebApp.offEvent("mainButtonClicked", handleReceivedData);
+    };
+  }, []);
+
   return (
     <div className="App">
       <h1>User List</h1>
@@ -58,6 +69,8 @@ function App() {
           <p><strong>First Name:</strong> {userData.first_name}</p>
           <p><strong>Last Name:</strong> {userData.last_name}</p>
           <p><strong>Username:</strong> {userData.username}</p>
+          <p><strong>Language Code:</strong> {userData.language_code}</p>
+          <p><strong>Phone Number:</strong> {userData.phone_number || "Not available"}</p>
         </div>
       )}
 

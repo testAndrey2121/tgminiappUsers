@@ -11,13 +11,16 @@ function ConnectWithTg({ onUserData }) {
       onUserData(user);
     }
 
-    // Пример установки состояния мини-приложения
     tg.MainButton.setText("Submit");
     tg.MainButton.show();
 
     tg.MainButton.onClick(() => {
       tg.sendData("User clicked submit");
     });
+
+    if (!user) {
+      tg.MainButton.hide();
+    }
 
     return () => {
       tg.MainButton.offClick();
