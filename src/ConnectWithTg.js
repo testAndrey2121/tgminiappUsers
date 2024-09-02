@@ -10,7 +10,19 @@ function ConnectWithTg({ onUserData }) {
     if (user) {
       onUserData(user);
     }
-  }, [onUserData]); // Добавляем onUserData в зависимости
+
+    // Пример установки состояния мини-приложения
+    tg.MainButton.setText("Submit");
+    tg.MainButton.show();
+
+    tg.MainButton.onClick(() => {
+      tg.sendData("User clicked submit");
+    });
+
+    return () => {
+      tg.MainButton.offClick();
+    };
+  }, [onUserData]);
 
   const onClose = () => {
     tg.close();
@@ -18,7 +30,7 @@ function ConnectWithTg({ onUserData }) {
 
   return (
     <div className="btn">
-      <button onClick={onClose}>Close</button>
+      <button onClick={onClose}>Close App</button>
     </div>
   );
 }
