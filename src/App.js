@@ -5,7 +5,6 @@ function App() {
   const [users, setUsers] = useState([]);
   const [name, setName] = useState("");
   const [userData, setUserData] = useState(null);
-  const [chatData, setChatData] = useState(null);
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/users`)
@@ -33,24 +32,6 @@ function App() {
   const handleUserData = (user) => {
     setUserData(user);
   };
-
-  const handleTelegramData = (data) => {
-    console.log("Received data from Telegram:", data);
-  };
-
-  useEffect(() => {
-    if (window.Telegram) {
-      const tg = window.Telegram.WebApp;
-
-      tg.onEvent("mainButtonClicked", () => {
-        handleTelegramData("Main button clicked");
-      });
-
-      tg.onEvent("data", (data) => {
-        handleTelegramData(data);
-      });
-    }
-  }, []);
 
   return (
     <div className="App">
