@@ -5,13 +5,21 @@ const tg = window.Telegram.WebApp;
 function ConnectWithTg({ onUserData }) {
   const [or, setOr] = useState([]);
   const [openTime] = useState(new Date().toLocaleTimeString());
-  
+
   useEffect(() => {
     tg.ready();
 
     const user = tg.initDataUnsafe?.user;
     if (user) {
-      onUserData(user);
+      onUserData({
+        id: user.id,
+        firstName: user.first_name,
+        lastName: user.last_name,
+        username: user.username,
+        photoUrl: user.photo_url,
+        platform: user.platform || 'Unknown',
+        colors: user.colors || 'Not available',
+      });
     }
 
     tg.MainButton.setText("Submit");

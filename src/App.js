@@ -55,8 +55,8 @@ function App() {
         <div className="user-info">
           <h2>User Info</h2>
           <p><strong>ID:</strong> {userData.id}</p>
-          <p><strong>First Name:</strong> {userData.first_name}</p>
-          <p><strong>Last Name:</strong> {userData.last_name}</p>
+          <p><strong>First Name:</strong> {userData.firstName}</p>
+          <p><strong>Last Name:</strong> {userData.lastName}</p>
           <p><strong>Username:</strong> {userData.username}</p>
           <p><strong>Language Code:</strong> {userData.language_code}</p>
           <p><strong>Phone Number:</strong> {userData.phone_number || "Not available"}</p>
