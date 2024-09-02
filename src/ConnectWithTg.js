@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const tg = window.Telegram.WebApp;
 
-const [or, setOr] = ([])
+const [or, setOr] = useState([])
 
 function ConnectWithTg({ onUserData }) {
   useEffect(() => {
