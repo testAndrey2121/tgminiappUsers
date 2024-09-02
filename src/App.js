@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ConnectWithTg from './ConnectWithTg';
 
 function App() {
@@ -32,17 +32,6 @@ function App() {
   const handleUserData = (user) => {
     setUserData(user);
   };
-
-  const handleReceivedData = (event) => {
-    console.log("Received data from Telegram:", event.data);
-  };
-
-  useEffect(() => {
-    window.Telegram.WebApp.onEvent("mainButtonClicked", handleReceivedData);
-    return () => {
-      window.Telegram.WebApp.offEvent("mainButtonClicked", handleReceivedData);
-    };
-  }, []);
 
   return (
     <div className="App">

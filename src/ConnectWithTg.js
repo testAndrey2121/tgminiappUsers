@@ -4,6 +4,7 @@ const tg = window.Telegram.WebApp;
 
 function ConnectWithTg({ onUserData }) {
   const [or, setOr] = useState([]);
+  const [openTime, setOpenTime] = useState(new Date().toLocaleTimeString());
 
   useEffect(() => {
     tg.ready();
@@ -17,9 +18,8 @@ function ConnectWithTg({ onUserData }) {
     tg.MainButton.show();
 
     const handleMainButtonClick = () => {
-      setOr((prevOr) => [...prevOr, { item: 'item №' }]);
+      setOr((prevOr) => [...prevOr, { item: `item №${or.length + 1}` }]);
       tg.sendData("User clicked submit");
-
       tg.notify("Data has been sent!");
     };
 
@@ -32,7 +32,7 @@ function ConnectWithTg({ onUserData }) {
     return () => {
       tg.MainButton.offClick(handleMainButtonClick);
     };
-  }, [onUserData]);
+  }, [onUserData, or.length]);
 
   const onClose = () => {
     tg.close();
@@ -41,7 +41,8 @@ function ConnectWithTg({ onUserData }) {
   return (
     <div className="btn">
       <button onClick={onClose}>Close App</button>
-      {or.length === 0 ? '' : or.map((i, idx) => (<div key={i.item + idx}>{i.item + (idx+1)}</div>))}
+      {or.length === 0 ? '' : or.map((i, idx) => (<div key={i.item + idx}>{i.item + (idx + 1)}</div>))}
+      <p><strong>Form Open Time:</strong> {openTime}</p>
     </div>
   );
 }
