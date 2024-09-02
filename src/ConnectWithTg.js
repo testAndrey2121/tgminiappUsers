@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 
 const tg = window.Telegram.WebApp;
 
-const [or, setOr] = useState([])
-
 function ConnectWithTg({ onUserData }) {
+  const [or, setOr] = useState([]);
+
   useEffect(() => {
     tg.ready();
 
@@ -16,16 +16,18 @@ function ConnectWithTg({ onUserData }) {
     tg.MainButton.setText("Submit");
     tg.MainButton.show();
 
-    tg.MainButton.onClick(() => {
-      setOr([...or, {item: 'item1'}])
-    });
+    const handleMainButtonClick = () => {
+      setOr((prevOr) => [...prevOr, { item: 'item1' }]);
+    };
+
+    tg.MainButton.onClick(handleMainButtonClick);
 
     if (!user) {
       tg.MainButton.hide();
     }
 
     return () => {
-      tg.MainButton.offClick();
+      tg.MainButton.offClick(handleMainButtonClick);
     };
   }, [onUserData]);
 
@@ -36,7 +38,7 @@ function ConnectWithTg({ onUserData }) {
   return (
     <div className="btn">
       <button onClick={onClose}>Close App</button>
-      {or.length === 0 ? '' : or.map( (i, idx) => (<div key={i.item+idx}>{i.item}</div>))}
+      {or.length === 0 ? '' : or.map((i, idx) => (<div key={i.item + idx}>{i.item}</div>))}
     </div>
   );
 }
