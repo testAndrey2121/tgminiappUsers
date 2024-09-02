@@ -1,39 +1,36 @@
 import React, { useEffect, useState } from 'react';
+import ConnectWithTg from './ConnectWithTg';
 
 function App() {
   const [users, setUsers] = useState([]);
   const [name, setName] = useState("");
   const [userData, setUserData] = useState(null);
-  const [tg, setTg] = useState();
 
   useEffect(() => {
-    setTg(window.Telegram.WebApp)
-    tg.ready();
-
-    const user = tg.initDataUnsafe?.user;
-    if (user) {
-      setUserData(user);
-    }
-
     fetch(`http://localhost:3000/api/users`)
       .then((response) => response.json())
       .then((data) => setUsers(data));
   }, []);
 
   const addUser = () => {
+    if (!userData) {
+      alert("User data not available. Unable to add user.");
+      return;
+    }
+
     fetch(`http://localhost:3000/api/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ name })
+      body: JSON.stringify({ name, creatorId: userData.id })
     })
       .then((response) => response.json())
       .then((newUser) => setUsers([...users, newUser]));
   };
 
-  const closeApp = () => {
-    tg.close();
+  const handleUserData = (user) => {
+    setUserData(user);
   };
 
   return (
@@ -41,7 +38,9 @@ function App() {
       <h1>User List</h1>
       <ul>
         {users.map((user) => (
-          <li key={user.id}>{user.name}</li>
+          <li key={user.id}>
+            {user.name} (Created by: User ID {user.creatorId})
+          </li>
         ))}
       </ul>
       <input
@@ -62,7 +61,7 @@ function App() {
         </div>
       )}
 
-      <button onClick={closeApp}>Close App</button>
+      <ConnectWithTg onUserData={handleUserData} />
     </div>
   );
 }
