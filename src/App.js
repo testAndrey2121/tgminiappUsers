@@ -62,7 +62,7 @@ function App() {
           <p><strong>Phone Number:</strong> {userData.phone_number || "Not available"}</p>
           <p><strong>Platform:</strong> {userData.platform}</p>
           <p><strong>Colors:</strong> {userData.colors}</p>
-          <p><strong>Photo:</strong> <img src={userData.photoUrl} alt="User" style={{ width: '50px', height: '50px' }}/></p>
+          <p><strong>Photo:</strong> <img src={userData.photoUrl} alt={`${userData.photoUrl}`} style={{ width: '50px', height: '50px' }}/></p>
           <p><strong>Telegram Premium:</strong> {userData.isPremium ? "Yes" : "No"}</p>
         </div>
       )}
