@@ -60,6 +60,9 @@ function App() {
           <p><strong>Username:</strong> {userData.username}</p>
           <p><strong>Language Code:</strong> {userData.language_code}</p>
           <p><strong>Phone Number:</strong> {userData.phone_number || "Not available"}</p>
+          <p><strong>Platform:</strong> {userData.platform}</p>
+          <p><strong>Colors:</strong> {userData.colors}</p>
+          <p><strong>Photo:</strong> <img src={userData.photoUrl} alt="User" style={{ width: '50px', height: '50px' }}/></p>
         </div>
       )}
 
