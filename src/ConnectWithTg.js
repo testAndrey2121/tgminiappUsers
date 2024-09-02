@@ -17,7 +17,10 @@ function ConnectWithTg({ onUserData }) {
     tg.MainButton.show();
 
     const handleMainButtonClick = () => {
-      setOr((prevOr) => [...prevOr, { item: 'item1' }]);
+      setOr((prevOr) => [...prevOr, { item: 'item №' }]);
+      tg.sendData("User clicked submit");
+
+      tg.notify("Data has been sent!");
     };
 
     tg.MainButton.onClick(handleMainButtonClick);
@@ -38,7 +41,7 @@ function ConnectWithTg({ onUserData }) {
   return (
     <div className="btn">
       <button onClick={onClose}>Close App</button>
-      {or.length === 0 ? '' : or.map((i, idx) => (<div key={i.item + idx}>{i.item}</div>))}
+      {or.length === 0 ? '' : or.map((i, idx) => (<div key={i.item + idx}>{i.item + (idx+1)}</div>))}
     </div>
   );
 }
