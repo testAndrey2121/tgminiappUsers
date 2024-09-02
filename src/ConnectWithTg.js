@@ -2,6 +2,8 @@ import { useEffect } from "react";
 
 const tg = window.Telegram.WebApp;
 
+const [or, setOr] = ([])
+
 function ConnectWithTg({ onUserData }) {
   useEffect(() => {
     tg.ready();
@@ -15,7 +17,7 @@ function ConnectWithTg({ onUserData }) {
     tg.MainButton.show();
 
     tg.MainButton.onClick(() => {
-      tg.sendData("User clicked submit");
+      setOr([...or, {item: 'item1'}])
     });
 
     if (!user) {
@@ -34,6 +36,7 @@ function ConnectWithTg({ onUserData }) {
   return (
     <div className="btn">
       <button onClick={onClose}>Close App</button>
+      {or.length === 0 ? '' : or.map( (i, idx) => (<div key={i.item+idx}>{i.item}</div>))}
     </div>
   );
 }
