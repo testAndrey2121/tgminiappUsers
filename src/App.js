@@ -4,11 +4,10 @@ function App() {
   const [users, setUsers] = useState([]);
   const [name, setName] = useState("");
   const [userData, setUserData] = useState(null);
-
-  let tg
+  const [tg, setTg] = useState();
 
   useEffect(() => {
-    tg = window.Telegram.WebApp
+    setTg(window.Telegram.WebApp)
     tg.ready();
 
     const user = tg.initDataUnsafe?.user;
