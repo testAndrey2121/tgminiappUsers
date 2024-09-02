@@ -5,7 +5,7 @@ const tg = window.Telegram.WebApp;
 function ConnectWithTg({ onUserData }) {
   const [or, setOr] = useState([]);
   const [openTime] = useState(new Date().toLocaleTimeString());
-
+  
   useEffect(() => {
     tg.ready();
 
@@ -16,9 +16,11 @@ function ConnectWithTg({ onUserData }) {
         firstName: user.first_name,
         lastName: user.last_name,
         username: user.username,
+        languageCode: user.language_code,
         photoUrl: user.photo_url,
         platform: user.platform || 'Unknown',
         colors: user.colors || 'Not available',
+        isPremium: user.is_premium || false
       });
     }
 
