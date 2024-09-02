@@ -1,19 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const tg = window.Telegram.WebApp;
 
 function ConnectWithTg({ onUserData }) {
-  const [userData, setUserData] = useState(null);
-
   useEffect(() => {
     tg.ready();
 
     const user = tg.initDataUnsafe?.user;
     if (user) {
-      setUserData(user);
-      onUserData(user); // Передаем данные пользователя в родительский компонент
+      onUserData(user);
     }
-  }, []);
+  }, [onUserData]); // Добавляем onUserData в зависимости
 
   const onClose = () => {
     tg.close();
@@ -21,7 +18,7 @@ function ConnectWithTg({ onUserData }) {
 
   return (
     <div className="btn">
-      <button onClick={onClose}>Close App</button>
+      <button onClick={onClose}>Close</button>
     </div>
   );
 }
