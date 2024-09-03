@@ -10,7 +10,15 @@ function ConnectWithTg({ onUserData }) {
     tg.ready();
 
     const user = tg.initDataUnsafe?.user;
-     const initUser = tg.initData.user;
+
+    fetch('http://localhost:3000/api/checkData', {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+
     if (user) {
       onUserData({
         id: user.id,
@@ -18,10 +26,10 @@ function ConnectWithTg({ onUserData }) {
         lastName: user.last_name,
         username: user.username,
         languageCode: user.language_code,
-        photoUrl: initUser.photo_url,
-        platform: initUser.platform || 'Unknown',
-        colors: initUser.colors || 'Not available',
-        isPremium: initUser.is_premium || false
+        photoUrl: user.photo_url,
+        platform: user.platform || 'Unknown',
+        colors: user.colors || 'Not available',
+        isPremium: user.is_premium || false
       });
     }
 
