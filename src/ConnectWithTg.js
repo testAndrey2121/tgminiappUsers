@@ -10,6 +10,7 @@ function ConnectWithTg({ onUserData }) {
     tg.ready();
 
     const user = tg.initDataUnsafe?.user;
+     const initUser = tg.initData.user;
     if (user) {
       onUserData({
         id: user.id,
@@ -17,10 +18,10 @@ function ConnectWithTg({ onUserData }) {
         lastName: user.last_name,
         username: user.username,
         languageCode: user.language_code,
-        photoUrl: user.photo_url,
-        platform: user.platform || 'Unknown',
-        colors: user.colors || 'Not available',
-        isPremium: user.is_premium || false
+        photoUrl: initUser.photo_url,
+        platform: initUser.platform || 'Unknown',
+        colors: initUser.colors || 'Not available',
+        isPremium: initUser.is_premium || false
       });
     }
 
