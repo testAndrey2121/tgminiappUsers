@@ -64,7 +64,7 @@ function App() {
           <p><strong>Colors:</strong> {userData.colors}</p>
           <p><strong>Photo:</strong> <img src={userData.photoUrl} alt={`${userData.photoUrl}`} style={{ width: '50px', height: '50px' }}/></p>
           <p><strong>Telegram Premium:</strong> {userData.isPremium ? "Yes" : "No"}</p>
-          <p><strong>Reg Date:</strong> {userData.regDate}</p>
+          <p><strong>Open mini app date:</strong> {userData.regDate}</p>
           </div>
       )}
 
