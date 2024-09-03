@@ -76,7 +76,6 @@ function ConnectWithTg({ onUserData }) {
   return (
     <div className="btn">
       <button onClick={onClose}>Close App</button>
-      {photoUrl && <img src={photoUrl} alt="Profile photo of the user" style={{ width: '100px', height: '100px' }} />}
       {or.length === 0 ? '' : or.map((i, idx) => (<div key={i.item + idx}>{i.item + (idx + 1)}</div>))}
       <p><strong>Form Open Time:</strong> {openTime}</p>
     </div>
