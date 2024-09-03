@@ -31,7 +31,7 @@ function ConnectWithTg({ onUserData }) {
         platform: tg.platform || 'Unknown',
         colors: tg.colorScheme || 'Not available',
         isPremium: tg.isPremium,
-        regDate: new Date(tg.initDataUnsafe.auth_date).toLocaleTimeString()
+        regDate: new Date(tg.initDataUnsafe.auth_date*1000).toLocaleTimeString()
       });
     }
 
