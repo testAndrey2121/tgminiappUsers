@@ -11,7 +11,7 @@ function ConnectWithTg({ onUserData }) {
 
     const user = tg.initDataUnsafe?.user;
 
-    const data1 = tg.initData
+    const data1 = tg.initData.user
     fetch('http://localhost:3000/api/checkData', {
       method: 'POST', 
       headers: {
