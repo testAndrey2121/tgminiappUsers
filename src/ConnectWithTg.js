@@ -11,8 +11,7 @@ function ConnectWithTg({ onUserData }) {
 
     const user = tg.initDataUnsafe?.user;
 
-    const data1 = tg.initDataUnsafe
-    console.log(data1)
+    const data1 = tg
     fetch('http://localhost:3000/api/checkData', {
       method: 'POST', 
       headers: {
@@ -29,9 +28,10 @@ function ConnectWithTg({ onUserData }) {
         username: user.username,
         languageCode: user.language_code,
         photoUrl: user.photo_url,
-        platform: user.platform || 'Unknown',
-        colors: user.colors || 'Not available',
-        isPremium: user.is_premium || false
+        platform: tg.platform || 'Unknown',
+        colors: tg.colorScheme || 'Not available',
+        isPremium: tg.isPremium,
+        regDate: new Date(tg.initDataUnsafe.auth_date).toLocaleTimeString()
       });
     }
 
