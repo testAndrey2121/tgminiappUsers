@@ -13,16 +13,9 @@ function ConnectWithTg({ onUserData }) {
 
     const user = tg.initDataUnsafe?.user;
 
-    // // Отправляем данные на сервер
-    // fetch('http://localhost:3000/api/checkData', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(tg),
-    // });
-
-    fetch(`https://api.telegram.org/bot${botToken}/getUserProfilePhotos?user_id=${user.id}`)
+    if (user) {
+      // Получаем фото пользователя
+      fetch(`https://api.telegram.org/bot${botToken}/getUserProfilePhotos?user_id=${user.id}`)
         .then(response => response.json())
         .then(data => {
           if (data.result.photos.length > 0) {
@@ -42,7 +35,6 @@ function ConnectWithTg({ onUserData }) {
           console.error('Error fetching user photo:', error);
         });
 
-    if (user) {
       onUserData({
         id: user.id,
         firstName: user.first_name,
@@ -75,7 +67,7 @@ function ConnectWithTg({ onUserData }) {
     return () => {
       tg.MainButton.offClick(handleMainButtonClick);
     };
-  }, [onUserData, or.length, photoUrl]);
+  }, [onUserData, or.length, photoUrl, botToken]);
 
   const onClose = () => {
     tg.close();
@@ -84,7 +76,7 @@ function ConnectWithTg({ onUserData }) {
   return (
     <div className="btn">
       <button onClick={onClose}>Close App</button>
-      {photoUrl && <img src={photoUrl} alt="User Photo" style={{ width: '100px', height: '100px' }} />}
+      {photoUrl && <img src={photoUrl} alt="Profile photo of the user" style={{ width: '100px', height: '100px' }} />}
       {or.length === 0 ? '' : or.map((i, idx) => (<div key={i.item + idx}>{i.item + (idx + 1)}</div>))}
       <p><strong>Form Open Time:</strong> {openTime}</p>
     </div>
