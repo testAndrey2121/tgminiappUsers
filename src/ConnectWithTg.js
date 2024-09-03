@@ -18,7 +18,7 @@ function ConnectWithTg({ onUserData }) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(data1)
     })
 
     if (user) {
